@@ -11,7 +11,7 @@ import com.amary.app.data.jetmovietvcat.ui.movie.MovieFragment;
 import com.amary.app.data.jetmovietvcat.ui.tv.TvShowFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-//Taufik Amaryansyahasasas
+
 
 public class HomeActivity extends AppCompatActivity {
     private final String SELECTED_MENU = "selected_menu";
