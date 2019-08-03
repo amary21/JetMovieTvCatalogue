@@ -26,6 +26,8 @@ public class HomeActivity extends AppCompatActivity {
             fragment = TvShowFragment.newInstance();
         }
 
+        //created by taufik
+
         if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
