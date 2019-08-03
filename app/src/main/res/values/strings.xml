@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">JetMovieTvCat</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title">Title</string>
+    <string name="release_date">01-Juni-1998</string>
+    <string name="rate">9.9</string>
+    <string name="movies">Movies</string>
+    <string name="tv_shows">Tv Shows</string>
+    <string name="title_activity_detail_movie">DetailMovieActivity</string>
+    <string name="title_activity_detail_tv">DetailTvActivity</string>
+    <string name="description">Description</string>
+    <string name="release">Release Date : </string>
+    <string name="rating">Rating : </string>
+    <string name="synopsis">Synopsis</string>
+</resources>

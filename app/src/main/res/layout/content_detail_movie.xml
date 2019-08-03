@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.detail.movie.DetailMovieActivity"
+    tools:showIn="@layout/activity_detail_movie">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_detail_movie_poster"
+            android:layout_width="162dp"
+            android:layout_height="243dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/white"
+            android:scaleType="fitXY"
+            android:tint="#11000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription,MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/description"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_detail_movie_poster"
+            app:layout_constraintTop_toTopOf="@+id/img_detail_movie_poster"
+            tools:ignore="MissingConstraints" />
+
+        <View
+            android:id="@+id/viewline_1"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_detail_movie_poster"
+            app:layout_constraintTop_toBottomOf="@+id/textDescription"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textRelease"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/release"
+            app:layout_constraintStart_toStartOf="@+id/viewline_1"
+            app:layout_constraintTop_toBottomOf="@+id/viewline_1"
+            tools:ignore="MissingConstraints"/>
+
+        <TextView
+            android:id="@+id/textRate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/rating"
+            app:layout_constraintStart_toStartOf="@+id/viewline_1"
+            app:layout_constraintTop_toBottomOf="@+id/textRelease"
+            tools:ignore="MissingConstraints"/>
+
+        <TextView
+            android:id="@+id/txt_detail_movie_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/release_date"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textRelease"
+            app:layout_constraintTop_toTopOf="@+id/textRelease"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/txt_detail_movie_rate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/rate"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textRate"
+            app:layout_constraintTop_toTopOf="@+id/textRate"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textSynopsis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/synopsis"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/img_detail_movie_poster"
+            app:layout_constraintStart_toStartOf="@+id/img_detail_movie_poster"
+            app:layout_constraintTop_toBottomOf="@+id/img_detail_movie_poster"
+            tools:ignore="MissingConstraints" />
+
+        <View
+            android:id="@+id/viewline_2"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textSynopsis"
+            app:layout_constraintTop_toBottomOf="@+id/textSynopsis"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/txt_detail_movie_sinopsis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Sinopsis Film"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/viewline_2"
+            app:layout_constraintStart_toStartOf="@+id/viewline_2"
+            app:layout_constraintTop_toBottomOf="@+id/viewline_2"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
