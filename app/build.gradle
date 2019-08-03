@@ -21,6 +21,12 @@ android {
             debuggable true
         }
     }
+    buildTypes.each {
+        it.buildConfigField("String", "API_KEY", API_KEY)
+        it.buildConfigField("String", "BASE_URL", BASE_URL)
+        it.buildConfigField("String", "COVER_IMAGE", COVER_IMAGE)
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
