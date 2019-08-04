@@ -2,7 +2,7 @@ package com.amary.app.data.jetmovietvcat.ui.detail.movie;
 
 import androidx.lifecycle.ViewModel;
 
-import com.amary.app.data.jetmovietvcat.data.MovieEntity;
+import com.amary.app.data.jetmovietvcat.data.local.MovieEntity;
 import com.amary.app.data.jetmovietvcat.utils.DataDummy;
 
 public class DetailMovieViewModel extends ViewModel {

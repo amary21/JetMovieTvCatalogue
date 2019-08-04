@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amary.app.data.jetmovietvcat.R;
-import com.amary.app.data.jetmovietvcat.data.TvShowEntity;
+import com.amary.app.data.jetmovietvcat.data.local.TvShowEntity;
 
 import java.util.List;
 
