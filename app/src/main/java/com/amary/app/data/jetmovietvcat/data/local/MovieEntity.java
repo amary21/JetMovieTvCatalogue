@@ -1,4 +1,4 @@
-package com.amary.app.data.jetmovietvcat.data;
+package com.amary.app.data.jetmovietvcat.data.local;
 
 public class MovieEntity {
     private String movieId;
