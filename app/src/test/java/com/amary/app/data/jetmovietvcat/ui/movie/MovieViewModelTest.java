@@ -1,6 +1,6 @@
 package com.amary.app.data.jetmovietvcat.ui.movie;
 
-import com.amary.app.data.jetmovietvcat.data.local.MovieEntity;
+import com.amary.app.data.jetmovietvcat.data.MovieEntity;
 
 import org.junit.After;
 import org.junit.Before;
