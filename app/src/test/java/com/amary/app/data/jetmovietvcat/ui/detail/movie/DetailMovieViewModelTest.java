@@ -1,39 +1,44 @@
 package com.amary.app.data.jetmovietvcat.ui.detail.movie;
 
+import com.amary.app.data.jetmovietvcat.data.source.JetMovieTvRepository;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
+import com.amary.app.data.jetmovietvcat.utils.FakeDataDummy;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class DetailMovieViewModelTest {
     private DetailMovieViewModel viewModel;
-    private MovieEntity movieEntity;
+    private JetMovieTvRepository jetMovieTvRepository = mock(JetMovieTvRepository.class);
+    private MovieEntity movieEntity = FakeDataDummy.generateDummyMovies().get(0);
+    private String movieId = movieEntity.getMovieId();
 
     @Before
     public void setUp(){
-        viewModel = new DetailMovieViewModel();
-        movieEntity = new MovieEntity("m08",
-                "Glass",
-                "January 16, 2019",
-                "6.5",
-                "https://image.tmdb.org/t/p/w342/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg",
-                "https://image.tmdb.org/t/p/w342/ngBFDOsx13sFXiMweDoL54XYknR.jpg",
-                "In a series of escalating encounters, former security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man who has twenty-four personalities. Meanwhile, the shadowy presence of Elijah Price emerges as an orchestrator who holds secrets critical to both men.");
-    }
-
-    @After
-    public void tearDown(){
-
+        viewModel = new DetailMovieViewModel(jetMovieTvRepository);
+        viewModel.setMovieId(movieId);
     }
 
     @Test
     public void getMovies() {
-        viewModel.setMovieId(movieEntity.getMovieId());
+        when(jetMovieTvRepository.getDetailMovie(movieId)).thenReturn(movieEntity);
         MovieEntity entity = viewModel.getMovies();
+        verify(jetMovieTvRepository).getDetailMovie(movieId);
         assertNotNull(entity);
+
+        assertNotNull(entity.getMovieId());
+        assertNotNull(entity.getMovieTitle());
+        assertNotNull(entity.getMovieDate());
+        assertNotNull(entity.getMovieRate());
+        assertNotNull(entity.getImgMoviePoster());
+        assertNotNull(entity.getImgMovieBg());
+        assertNotNull(entity.getMovieSynopsis());
+
         assertEquals(movieEntity.getMovieId(), entity.getMovieId());
         assertEquals(movieEntity.getMovieTitle(), entity.getMovieTitle());
         assertEquals(movieEntity.getMovieDate(), entity.getMovieDate());

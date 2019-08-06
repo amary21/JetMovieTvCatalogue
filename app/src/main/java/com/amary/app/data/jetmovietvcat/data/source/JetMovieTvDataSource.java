@@ -7,12 +7,10 @@ import java.util.List;
 
 public interface JetMovieTvDataSource {
 
-    //movies
     List<MovieEntity> getAllMovies();
 
     MovieEntity getDetailMovie(String movieId);
 
-    //tvshows
     List<TvShowEntity> getAllTvShows();
 
     TvShowEntity getDetailTvShows(String tvId);

@@ -1,5 +1,7 @@
 package com.amary.app.data.jetmovietvcat.data.source;
 
+import androidx.annotation.NonNull;
+
 import com.amary.app.data.jetmovietvcat.data.source.local.LocalRepository;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
@@ -10,23 +12,23 @@ import com.amary.app.data.jetmovietvcat.data.source.remote.response.TvShowRespon
 import java.util.ArrayList;
 import java.util.List;
 
-public class JetMovieTvRepository implements JetMovieTvDataSource{
+public class FakeJetMovieTvRepository implements JetMovieTvDataSource{
 
-    private volatile static JetMovieTvRepository INSTANCE = null;
+    private volatile static FakeJetMovieTvRepository INSTANCE = null;
 
     private LocalRepository localRepository;
     private RemoteRepository remoteRepository;
 
-    private JetMovieTvRepository(LocalRepository localRepository, RemoteRepository remoteRepository) {
+    FakeJetMovieTvRepository(@NonNull LocalRepository localRepository, @NonNull RemoteRepository remoteRepository) {
         this.localRepository = localRepository;
         this.remoteRepository = remoteRepository;
     }
 
-    public static JetMovieTvRepository getInstance(LocalRepository localRepository, RemoteRepository remoteRepository){
+    public static FakeJetMovieTvRepository getInstance(LocalRepository localRepository, RemoteRepository remoteRepository){
         if (INSTANCE == null){
-            synchronized (JetMovieTvRepository.class){
+            synchronized (FakeJetMovieTvRepository.class){
                 if (INSTANCE == null){
-                    INSTANCE = new JetMovieTvRepository(localRepository, remoteRepository);
+                    INSTANCE = new FakeJetMovieTvRepository(localRepository, remoteRepository);
                 }
             }
         }
