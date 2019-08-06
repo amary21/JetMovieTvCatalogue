@@ -22,11 +22,11 @@ public class RemoteRepository {
         return INSTANCE;
     }
 
-    public List<MovieResponse> getAllMovies(){
+    public List<MovieResponse> getMovies(){
         return jsonHelper.loadMovies();
     }
 
-    public List<TvShowResponse> getAllTvShows(){
+    public List<TvShowResponse> getTvShows(){
         return jsonHelper.loadTvShows();
     }
 }
