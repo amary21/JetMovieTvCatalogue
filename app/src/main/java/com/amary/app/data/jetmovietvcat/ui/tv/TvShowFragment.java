@@ -10,12 +10,14 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amary.app.data.jetmovietvcat.R;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
+import com.amary.app.data.jetmovietvcat.viewmodel.ViewModelFactory;
 
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class TvShowFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
             progressBar.setVisibility(View.GONE);
-            TvShowViewModel viewModel = ViewModelProviders.of(this).get(TvShowViewModel.class);
+            TvShowViewModel viewModel = obtainViewModel(getActivity());
             List<TvShowEntity> tvShows = viewModel.getTvs();
 
             TvShowAdapter adapter = new TvShowAdapter(getActivity());
@@ -64,5 +66,11 @@ public class TvShowFragment extends Fragment {
             rvTvShow.setHasFixedSize(true);
             rvTvShow.setAdapter(adapter);
         }
+    }
+
+    @NonNull
+    private static TvShowViewModel obtainViewModel(FragmentActivity activity) {
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+        return ViewModelProviders.of(activity, factory).get(TvShowViewModel.class);
     }
 }

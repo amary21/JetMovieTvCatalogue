@@ -10,12 +10,14 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amary.app.data.jetmovietvcat.R;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
+import com.amary.app.data.jetmovietvcat.viewmodel.ViewModelFactory;
 
 import java.util.List;
 
@@ -53,7 +55,7 @@ public class MovieFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
             progressBar.setVisibility(View.GONE);
-            MovieViewModel viewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+            MovieViewModel viewModel = obtainViewModel(getActivity());
             List<MovieEntity> movies = viewModel.getMovies();
 
             MovieAdapter adapter = new MovieAdapter(getActivity());
@@ -63,5 +65,11 @@ public class MovieFragment extends Fragment {
             rvMovie.setHasFixedSize(true);
             rvMovie.setAdapter(adapter);
         }
+    }
+
+    @NonNull
+    private static MovieViewModel obtainViewModel(FragmentActivity activity) {
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+        return ViewModelProviders.of(activity, factory).get(MovieViewModel.class);
     }
 }

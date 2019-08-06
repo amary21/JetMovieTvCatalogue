@@ -2,21 +2,20 @@ package com.amary.app.data.jetmovietvcat.ui.detail.movie;
 
 import androidx.lifecycle.ViewModel;
 
+import com.amary.app.data.jetmovietvcat.data.source.JetMovieTvRepository;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
 import com.amary.app.data.jetmovietvcat.utils.DataDummy;
 
 public class DetailMovieViewModel extends ViewModel {
-    private MovieEntity mMovie;
     private String movieId;
+    private JetMovieTvRepository jetMovieTvRepository;
 
-    MovieEntity getMovies(){
-        for (int i=0;i< DataDummy.generateDummyMovies().size();i++){
-            MovieEntity movieEntity = DataDummy.generateDummyMovies().get(i);
-            if (movieEntity.getMovieId().equals(movieId)){
-                mMovie = movieEntity;
-            }
-        }
-        return mMovie;
+    public DetailMovieViewModel(JetMovieTvRepository jetMovieTvRepository) {
+        this.jetMovieTvRepository = jetMovieTvRepository;
+    }
+
+    public MovieEntity getMovies(){
+        return jetMovieTvRepository.getDetailMovie(movieId);
     }
 
     String getMovieId() {

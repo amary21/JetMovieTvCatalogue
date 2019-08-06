@@ -14,6 +14,7 @@ import com.amary.app.data.jetmovietvcat.R;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
 import com.amary.app.data.jetmovietvcat.utils.DataDummy;
 import com.amary.app.data.jetmovietvcat.utils.GlideApp;
+import com.amary.app.data.jetmovietvcat.viewmodel.ViewModelFactory;
 import com.bumptech.glide.request.RequestOptions;
 
 public class DetailMovieActivity extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DetailMovieViewModel viewModel = ViewModelProviders.of(this).get(DetailMovieViewModel.class);
+        DetailMovieViewModel viewModel = obtainViewModel(this);;
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -59,6 +60,12 @@ public class DetailMovieActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @NonNull
+    private static DetailMovieViewModel obtainViewModel(AppCompatActivity activity) {
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+        return ViewModelProviders.of(activity, factory).get(DetailMovieViewModel.class);
     }
 
     private void populateMovie(String movieId) {

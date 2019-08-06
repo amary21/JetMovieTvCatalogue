@@ -14,6 +14,7 @@ import com.amary.app.data.jetmovietvcat.R;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
 import com.amary.app.data.jetmovietvcat.utils.DataDummy;
 import com.amary.app.data.jetmovietvcat.utils.GlideApp;
+import com.amary.app.data.jetmovietvcat.viewmodel.ViewModelFactory;
 import com.bumptech.glide.request.RequestOptions;
 
 public class DetailTvActivity extends AppCompatActivity {
@@ -34,7 +35,7 @@ public class DetailTvActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DetailTvViewModel viewModel = ViewModelProviders.of(this).get(DetailTvViewModel.class);
+        DetailTvViewModel viewModel = obtainViewModel(this);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -58,6 +59,12 @@ public class DetailTvActivity extends AppCompatActivity {
             populateTv(viewModel.getTvId());
         }
 
+    }
+
+    @NonNull
+    private static DetailTvViewModel obtainViewModel(AppCompatActivity activity) {
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+        return ViewModelProviders.of(activity,factory).get(DetailTvViewModel.class);
     }
 
     private void populateTv(String tvId) {

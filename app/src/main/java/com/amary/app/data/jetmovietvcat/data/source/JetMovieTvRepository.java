@@ -4,7 +4,10 @@ import com.amary.app.data.jetmovietvcat.data.source.local.LocalRepository;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
 import com.amary.app.data.jetmovietvcat.data.source.remote.RemoteRepository;
+import com.amary.app.data.jetmovietvcat.data.source.remote.response.MovieResponse;
+import com.amary.app.data.jetmovietvcat.data.source.remote.response.TvShowResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JetMovieTvRepository implements JetMovieTvDataSource{
@@ -32,21 +35,79 @@ public class JetMovieTvRepository implements JetMovieTvDataSource{
 
     @Override
     public List<MovieEntity> getAllMovies() {
-        return null;
+        List<MovieResponse> movieResponses = remoteRepository.getMovies();
+        ArrayList<MovieEntity> movieEntities = new ArrayList<>();
+        for (int i =0; i< movieResponses.size(); i++){
+            MovieResponse response = movieResponses.get(i);
+            MovieEntity entity = new MovieEntity(response.getId(),
+                    response.getTitle(),
+                    response.getDate(),
+                    response.getRate(),
+                    response.getPoster(),
+                    response.getBackground(),
+                    response.getSynopsis());
+
+            movieEntities.add(entity);
+        }
+
+        return movieEntities;
     }
 
     @Override
     public MovieEntity getDetailMovie(String movieId) {
-        return null;
+        MovieEntity entity = null;
+        List<MovieResponse> movies = remoteRepository.getMovies();
+        for (int i=0 ;i<movies.size(); i++){
+            MovieResponse response = movies.get(i);
+            if (response.getId().equals(movieId)){
+                entity = new MovieEntity(response.getId(),
+                        response.getTitle(),
+                        response.getDate(),
+                        response.getRate(),
+                        response.getPoster(),
+                        response.getBackground(),
+                        response.getSynopsis());
+            }
+        }
+        return entity;
     }
 
     @Override
     public List<TvShowEntity> getAllTvShows() {
-        return null;
+        List<TvShowResponse> tvShowResponses = remoteRepository.getTvShows();
+        ArrayList<TvShowEntity> tvShowEntities = new ArrayList<>();
+        for (int i =0; i < tvShowResponses.size(); i++){
+            TvShowResponse response = tvShowResponses.get(i);
+            TvShowEntity entity = new TvShowEntity(response.getId(),
+                    response.getTitle(),
+                    response.getDate(),
+                    response.getRate(),
+                    response.getPoster(),
+                    response.getBackground(),
+                    response.getSynopsis());
+
+            tvShowEntities.add(entity);
+        }
+        return tvShowEntities;
     }
 
     @Override
     public TvShowEntity getDetailTvShows(String tvId) {
-        return null;
+        TvShowEntity entity = null;
+        List<TvShowResponse> tvShows = remoteRepository.getTvShows();
+        for (int i=0; i<tvShows.size(); i++){
+            TvShowResponse response = tvShows.get(i);
+            if (response.getId().equals(tvId)){
+                entity = new TvShowEntity(response.getId(),
+                        response.getTitle(),
+                        response.getDate(),
+                        response.getRate(),
+                        response.getPoster(),
+                        response.getBackground(),
+                        response.getSynopsis());
+            }
+        }
+
+        return entity;
     }
 }
