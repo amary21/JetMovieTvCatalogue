@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.amary.app.data.jetmovietvcat.R;
-import com.amary.app.data.jetmovietvcat.data.TvShowEntity;
+import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
 import com.amary.app.data.jetmovietvcat.utils.DataDummy;
 import com.amary.app.data.jetmovietvcat.utils.GlideApp;
 import com.bumptech.glide.request.RequestOptions;

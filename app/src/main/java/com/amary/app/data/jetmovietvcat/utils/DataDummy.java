@@ -1,7 +1,7 @@
 package com.amary.app.data.jetmovietvcat.utils;
 
-import com.amary.app.data.jetmovietvcat.data.MovieEntity;
-import com.amary.app.data.jetmovietvcat.data.TvShowEntity;
+import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
+import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
 
 import java.util.ArrayList;
 

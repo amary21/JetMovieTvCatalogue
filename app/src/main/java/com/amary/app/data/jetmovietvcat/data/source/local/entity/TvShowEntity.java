@@ -1,4 +1,4 @@
-package com.amary.app.data.jetmovietvcat.data;
+package com.amary.app.data.jetmovietvcat.data.source.local.entity;
 
 public class TvShowEntity {
     private String tvId;
