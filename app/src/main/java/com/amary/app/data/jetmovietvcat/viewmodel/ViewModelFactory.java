@@ -17,10 +17,10 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     private static volatile ViewModelFactory INSTANCE;
 
-    private final JetMovieTvRepository jetMovieTvRepository;
+    private final JetMovieTvRepository mJetMovieTvRepository;
 
     private ViewModelFactory(JetMovieTvRepository jetMovieTvRepository) {
-        this.jetMovieTvRepository = jetMovieTvRepository;
+        mJetMovieTvRepository = jetMovieTvRepository;
     }
 
     public static ViewModelFactory getInstance(Application application){
@@ -35,22 +35,30 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         return INSTANCE;
     }
 
+//    @NonNull
+//    @Override
+//    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+//
+//
+//        throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
+//    }
+
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
         if (modelClass.isAssignableFrom(MovieViewModel.class)){
             //noinspection unchecked
-            return (T) new MovieViewModel(jetMovieTvRepository);
+            return (T) new MovieViewModel(mJetMovieTvRepository);
         }else if (modelClass.isAssignableFrom(TvShowViewModel.class)){
             //noinspection unchecked
-            return (T) new TvShowViewModel(jetMovieTvRepository);
+            return (T) new TvShowViewModel(mJetMovieTvRepository);
         }else if (modelClass.isAssignableFrom(DetailMovieViewModel.class)){
             //noinspection unchecked
-            return (T) new DetailMovieViewModel(jetMovieTvRepository);
+            return (T) new DetailMovieViewModel(mJetMovieTvRepository);
         }else if (modelClass.isAssignableFrom(DetailTvViewModel.class)){
             //noinspection unchecked
-            return (T) new DetailTvViewModel(jetMovieTvRepository);
+            return (T) new DetailTvViewModel(mJetMovieTvRepository);
         }
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());

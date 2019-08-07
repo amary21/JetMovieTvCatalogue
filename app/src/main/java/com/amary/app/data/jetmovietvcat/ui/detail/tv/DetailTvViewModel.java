@@ -16,10 +16,10 @@ public class DetailTvViewModel extends ViewModel {
     }
 
     LiveData <TvShowEntity> getTvShow() {
-        return jetMovieTvRepository.getDetailTvShows(tvId);
+        return jetMovieTvRepository.getDetailTvShows(getTvId());
     }
 
-    String getTvId() {
+    private String getTvId() {
         return tvId;
     }
 

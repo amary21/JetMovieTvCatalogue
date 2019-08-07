@@ -16,10 +16,10 @@ public class DetailMovieViewModel extends ViewModel {
     }
 
     LiveData <MovieEntity> getMovies(){
-        return jetMovieTvRepository.getDetailMovie(movieId);
+        return jetMovieTvRepository.getDetailMovie(getMovieId());
     }
 
-    String getMovieId() {
+    private String getMovieId() {
         return movieId;
     }
 
