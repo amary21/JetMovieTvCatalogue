@@ -3,11 +3,13 @@ package com.amary.app.data.jetmovietvcat.ui.detail.movie;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.test.espresso.IdlingRegistry;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import com.amary.app.data.jetmovietvcat.R;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
+import com.amary.app.data.jetmovietvcat.utils.EspressoIdlingResource;
 import com.amary.app.data.jetmovietvcat.utils.FakeDataDummy;
 
 import org.junit.After;
@@ -38,16 +40,23 @@ public class DetailMovieActivityTest {
     };
 
     @Before
-    public void setUp(){}
+    public void setUp(){
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource());
+    }
 
 
     @After
     public void tearDown(){
-
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource());
     }
 
     @Test
     public void loadMovie(){
+        try {
+            Thread.sleep(3000);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         onView(withId(R.id.txt_detail_movie_date)).check(matches(isDisplayed()));
         onView(withId(R.id.txt_detail_movie_date)).check(matches(withText(dummyMovie.getMovieDate())));
         onView(withId(R.id.txt_detail_movie_rate)).check(matches(isDisplayed()));

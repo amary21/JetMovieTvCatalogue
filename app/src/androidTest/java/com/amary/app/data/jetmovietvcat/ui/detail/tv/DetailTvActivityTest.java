@@ -48,6 +48,11 @@ public class DetailTvActivityTest {
 
     @Test
     public void loadMovie(){
+        try {
+            Thread.sleep(3000);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         onView(withId(R.id.txt_detail_tvshow_date)).check(matches(isDisplayed()));
         onView(withId(R.id.txt_detail_tvshow_date)).check(matches(withText(dummyTvShows.getTvDate())));
         onView(withId(R.id.txt_detail_tvshow_rate)).check(matches(isDisplayed()));
