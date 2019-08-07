@@ -1,5 +1,6 @@
 package com.amary.app.data.jetmovietvcat.ui.detail.movie;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.amary.app.data.jetmovietvcat.data.source.JetMovieTvRepository;
@@ -14,7 +15,7 @@ public class DetailMovieViewModel extends ViewModel {
         this.jetMovieTvRepository = jetMovieTvRepository;
     }
 
-    public MovieEntity getMovies(){
+    LiveData <MovieEntity> getMovies(){
         return jetMovieTvRepository.getDetailMovie(movieId);
     }
 

@@ -1,5 +1,6 @@
 package com.amary.app.data.jetmovietvcat.ui.tv;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.amary.app.data.jetmovietvcat.data.source.JetMovieTvRepository;
@@ -15,7 +16,7 @@ public class TvShowViewModel extends ViewModel {
         this.jetMovieTvRepository = jetMovieTvRepository;
     }
 
-    public List<TvShowEntity> getTvs(){
+    LiveData <List<TvShowEntity>> getTvs(){
         return jetMovieTvRepository.getAllTvShows();
     }
 }

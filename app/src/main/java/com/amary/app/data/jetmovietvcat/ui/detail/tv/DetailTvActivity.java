@@ -55,9 +55,12 @@ public class DetailTvActivity extends AppCompatActivity {
                 viewModel.setTvId(tvId);
             }
         }
-        if (viewModel.getTvShow() != null) {
-            populateTv(viewModel.getTvId());
-        }
+
+        viewModel.getTvShow().observe(this, tvShowEntity -> {
+            if (tvShowEntity != null){
+                populateTv(tvShowEntity);
+            }
+        });
 
     }
 
@@ -67,9 +70,7 @@ public class DetailTvActivity extends AppCompatActivity {
         return ViewModelProviders.of(activity,factory).get(DetailTvViewModel.class);
     }
 
-    private void populateTv(String tvId) {
-        TvShowEntity tvShowEntity = DataDummy.getTvShowEntity(tvId);
-
+    private void populateTv(TvShowEntity tvShowEntity) {
         if (getSupportActionBar() != null && tvShowEntity != null) {
             getSupportActionBar().setTitle(tvShowEntity.getTvTitle());
 

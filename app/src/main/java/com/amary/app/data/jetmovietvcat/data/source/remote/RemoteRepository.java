@@ -1,5 +1,7 @@
 package com.amary.app.data.jetmovietvcat.data.source.remote;
 
+import android.os.Handler;
+
 import com.amary.app.data.jetmovietvcat.data.source.remote.response.MovieResponse;
 import com.amary.app.data.jetmovietvcat.data.source.remote.response.TvShowResponse;
 import com.amary.app.data.jetmovietvcat.utils.JsonHelper;
@@ -8,6 +10,7 @@ import java.util.List;
 
 public class RemoteRepository {
 
+    private final long SERVICE_LATENCY_IN_MILLIS = 2000;
     private static RemoteRepository INSTANCE;
     private JsonHelper jsonHelper;
 
@@ -22,11 +25,26 @@ public class RemoteRepository {
         return INSTANCE;
     }
 
-    public List<MovieResponse> getMovies(){
-        return jsonHelper.loadMovies();
+    public void getMovies(LoadMoviesCallback callback){
+        Handler handler = new Handler();
+        handler.postDelayed(() -> callback.onAllMoviesReceive(jsonHelper.loadMovies()), SERVICE_LATENCY_IN_MILLIS);
     }
 
-    public List<TvShowResponse> getTvShows(){
-        return jsonHelper.loadTvShows();
+    public void getTvShows(LoadTvShowsCallback callback){
+        Handler handler = new Handler();
+        handler.postDelayed(() -> callback.onAllTvShowsReceive(jsonHelper.loadTvShows()), SERVICE_LATENCY_IN_MILLIS);
+    }
+
+
+    public interface LoadMoviesCallback{
+        void onAllMoviesReceive(List<MovieResponse> movieResponses);
+
+        void onDataNotAvailable();
+    }
+
+    public interface LoadTvShowsCallback{
+        void onAllTvShowsReceive(List<TvShowResponse> tvShowResponses);
+
+        void onDataNotAvailabe();
     }
 }

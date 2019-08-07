@@ -54,12 +54,16 @@ public class MovieFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
             MovieViewModel viewModel = obtainViewModel(getActivity());
-            List<MovieEntity> movies = viewModel.getMovies();
 
             MovieAdapter adapter = new MovieAdapter(getActivity());
-            adapter.setListMovie(movies);
+
+            viewModel.getMovies().observe(this, movieEntities -> {
+                progressBar.setVisibility(View.GONE);
+                adapter.setListMovie(movieEntities);
+                adapter.notifyDataSetChanged();
+            });
 
             rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
             rvMovie.setHasFixedSize(true);

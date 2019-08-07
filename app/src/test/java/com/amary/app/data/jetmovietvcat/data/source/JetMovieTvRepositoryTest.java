@@ -52,5 +52,33 @@ public class JetMovieTvRepositoryTest {
         assertEquals(tvShowResponses.size(), tvShowEntities.size());
     }
 
+    @Test
+    public void getDetailMovie(){
+        when(remoteRepository.getMovies()).thenReturn(movieResponses);
+        MovieEntity entity = fakeJetMovieTvRepository.getDetailMovie(movieId);
+        verify(remoteRepository).getMovies();
+        assertNotNull(entity);
+        assertEquals(movieResponses.get(0).getTitle(), entity.getMovieTitle());
+        assertEquals(movieResponses.get(0).getDate(), entity.getMovieDate());
+        assertEquals(movieResponses.get(0).getRate(), entity.getMovieRate());
+        assertEquals(movieResponses.get(0).getPoster(), entity.getImgMoviePoster());
+        assertEquals(movieResponses.get(0).getBackground(), entity.getImgMovieBg());
+        assertEquals(movieResponses.get(0).getSynopsis(), entity.getMovieSynopsis());
+    }
+
+    @Test
+    public void getDetailTvShows(){
+        when(remoteRepository.getTvShows()).thenReturn(tvShowResponses);
+        TvShowEntity entity = fakeJetMovieTvRepository.getDetailTvShows(tvshowId);
+        verify(remoteRepository).getTvShows();
+        assertNotNull(entity);
+        assertEquals(tvShowResponses.get(0).getTitle(), entity.getTvTitle());
+        assertEquals(tvShowResponses.get(0).getDate(), entity.getTvDate());
+        assertEquals(tvShowResponses.get(0).getRate(), entity.getTvRate());
+        assertEquals(tvShowResponses.get(0).getPoster(), entity.getImgTvPoster());
+        assertEquals(tvShowResponses.get(0).getBackground(), entity.getImgTvBg());
+        assertEquals(tvShowResponses.get(0).getSynopsis(), entity.getTvSynopsis());
+    }
+
 
 }

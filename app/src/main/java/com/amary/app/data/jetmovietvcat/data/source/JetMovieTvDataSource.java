@@ -1,5 +1,7 @@
 package com.amary.app.data.jetmovietvcat.data.source;
 
+import androidx.lifecycle.LiveData;
+
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
 
@@ -7,11 +9,11 @@ import java.util.List;
 
 public interface JetMovieTvDataSource {
 
-    List<MovieEntity> getAllMovies();
+    LiveData<List<MovieEntity>> getAllMovies();
 
-    MovieEntity getDetailMovie(String movieId);
+    LiveData<MovieEntity> getDetailMovie(String movieId);
 
-    List<TvShowEntity> getAllTvShows();
+    LiveData<List<TvShowEntity>> getAllTvShows();
 
-    TvShowEntity getDetailTvShows(String tvId);
+    LiveData<TvShowEntity> getDetailTvShows(String tvId);
 }

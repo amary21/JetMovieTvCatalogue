@@ -55,10 +55,11 @@ public class DetailMovieActivity extends AppCompatActivity {
             }
         }
 
-        if (viewModel.getMovies() != null) {
-            populateMovie(viewModel.getMovieId());
-        }
-
+        viewModel.getMovies().observe(this, movieEntity -> {
+            if (movieEntity != null){
+                populateMovie(movieEntity);
+            }
+        });
 
     }
 
@@ -68,8 +69,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         return ViewModelProviders.of(activity, factory).get(DetailMovieViewModel.class);
     }
 
-    private void populateMovie(String movieId) {
-        MovieEntity movieEntity = DataDummy.getMovieEntity(movieId);
+    private void populateMovie(MovieEntity movieEntity) {
 
         if (getSupportActionBar() != null && movieEntity != null) {
             getSupportActionBar().setTitle(movieEntity.getMovieTitle());

@@ -55,12 +55,16 @@ public class TvShowFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
             TvShowViewModel viewModel = obtainViewModel(getActivity());
-            List<TvShowEntity> tvShows = viewModel.getTvs();
 
             TvShowAdapter adapter = new TvShowAdapter(getActivity());
-            adapter.setListTvShow(tvShows);
+
+            viewModel.getTvs().observe(this, tvShowEntities -> {
+                progressBar.setVisibility(View.GONE);
+                adapter.setListTvShow(tvShowEntities);
+                adapter.notifyDataSetChanged();
+            });
 
             rvTvShow.setLayoutManager(new LinearLayoutManager(getContext()));
             rvTvShow.setHasFixedSize(true);

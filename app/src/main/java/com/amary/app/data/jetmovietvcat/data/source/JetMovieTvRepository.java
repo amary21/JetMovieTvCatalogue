@@ -1,5 +1,8 @@
 package com.amary.app.data.jetmovietvcat.data.source;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.amary.app.data.jetmovietvcat.data.source.local.LocalRepository;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
@@ -34,80 +37,125 @@ public class JetMovieTvRepository implements JetMovieTvDataSource{
     }
 
     @Override
-    public ArrayList<MovieEntity> getAllMovies() {
-        List<MovieResponse> movieResponses = remoteRepository.getMovies();
-        ArrayList<MovieEntity> movieEntities = new ArrayList<>();
-        for (int i =0; i< movieResponses.size(); i++){
-            MovieResponse response = movieResponses.get(i);
-            MovieEntity entity = new MovieEntity(response.getId(),
-                    response.getTitle(),
-                    response.getDate(),
-                    response.getRate(),
-                    response.getPoster(),
-                    response.getBackground(),
-                    response.getSynopsis());
+    public LiveData<List<MovieEntity>> getAllMovies() {
+        MutableLiveData<List<MovieEntity>> moviesEntities = new MutableLiveData<>();
+        remoteRepository.getMovies(new RemoteRepository.LoadMoviesCallback() {
+            @Override
+            public void onAllMoviesReceive(List<MovieResponse> movieResponses) {
+                ArrayList<MovieEntity> movieList = new ArrayList<>();
+                for (int i =0; i< movieResponses.size(); i++){
+                    MovieResponse response = movieResponses.get(i);
+                    MovieEntity entity = new MovieEntity(response.getId(),
+                            response.getTitle(),
+                            response.getDate(),
+                            response.getRate(),
+                            response.getPoster(),
+                            response.getBackground(),
+                            response.getSynopsis());
 
-            movieEntities.add(entity);
-        }
-
-        return movieEntities;
-    }
-
-    @Override
-    public MovieEntity getDetailMovie(String movieId) {
-        MovieEntity entity = null;
-        List<MovieResponse> movies = remoteRepository.getMovies();
-        for (int i=0 ;i<movies.size(); i++){
-            MovieResponse response = movies.get(i);
-            if (response.getId().equals(movieId)){
-                entity = new MovieEntity(response.getId(),
-                        response.getTitle(),
-                        response.getDate(),
-                        response.getRate(),
-                        response.getPoster(),
-                        response.getBackground(),
-                        response.getSynopsis());
+                    movieList.add(entity);
+                }
+                moviesEntities.postValue(movieList);
             }
-        }
-        return entity;
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
+
+        return moviesEntities;
     }
 
     @Override
-    public ArrayList<TvShowEntity> getAllTvShows() {
-        List<TvShowResponse> tvShowResponses = remoteRepository.getTvShows();
-        ArrayList<TvShowEntity> tvShowEntities = new ArrayList<>();
-        for (int i =0; i < tvShowResponses.size(); i++){
-            TvShowResponse response = tvShowResponses.get(i);
-            TvShowEntity entity = new TvShowEntity(response.getId(),
-                    response.getTitle(),
-                    response.getDate(),
-                    response.getRate(),
-                    response.getPoster(),
-                    response.getBackground(),
-                    response.getSynopsis());
+    public LiveData<MovieEntity> getDetailMovie(final String movieId) {
+        MutableLiveData<MovieEntity> movieEntites = new MutableLiveData<>();
+        remoteRepository.getMovies(new RemoteRepository.LoadMoviesCallback() {
+            @Override
+            public void onAllMoviesReceive(List<MovieResponse> movieResponses) {
+                for (int i=0 ;i < movieResponses.size(); i++){
+                    MovieResponse response = movieResponses.get(i);
+                    if (response.getId().equals(movieId)){
+                        MovieEntity entity = new MovieEntity(response.getId(),
+                                            response.getTitle(),
+                                            response.getDate(),
+                                            response.getRate(),
+                                            response.getPoster(),
+                                            response.getBackground(),
+                                            response.getSynopsis());
+                        movieEntites.postValue(entity);
+                    }
+                }
+            }
 
-            tvShowEntities.add(entity);
-        }
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
+
+        return movieEntites;
+    }
+
+    @Override
+    public LiveData<List<TvShowEntity>> getAllTvShows() {
+        MutableLiveData<List<TvShowEntity>> tvShowEntities = new MutableLiveData<>();
+        remoteRepository.getTvShows(new RemoteRepository.LoadTvShowsCallback() {
+            @Override
+            public void onAllTvShowsReceive(List<TvShowResponse> tvShowResponses) {
+                ArrayList<TvShowEntity> tvShowsList = new ArrayList<>();
+                for (int i =0; i < tvShowResponses.size(); i++){
+                    TvShowResponse response = tvShowResponses.get(i);
+                    TvShowEntity entity = new TvShowEntity(response.getId(),
+                            response.getTitle(),
+                            response.getDate(),
+                            response.getRate(),
+                            response.getPoster(),
+                            response.getBackground(),
+                            response.getSynopsis());
+
+                    tvShowsList.add(entity);
+                }
+                tvShowEntities.postValue(tvShowsList);
+            }
+
+            @Override
+            public void onDataNotAvailabe() {
+
+            }
+        });
+
         return tvShowEntities;
     }
 
     @Override
-    public TvShowEntity getDetailTvShows(String tvId) {
-        TvShowEntity entity = null;
-        List<TvShowResponse> tvShows = remoteRepository.getTvShows();
-        for (int i=0; i<tvShows.size(); i++){
-            TvShowResponse response = tvShows.get(i);
-            if (response.getId().equals(tvId)){
-                entity = new TvShowEntity(response.getId(),
-                        response.getTitle(),
-                        response.getDate(),
-                        response.getRate(),
-                        response.getPoster(),
-                        response.getBackground(),
-                        response.getSynopsis());
+    public LiveData<TvShowEntity> getDetailTvShows(final String tvId) {
+        MutableLiveData<TvShowEntity> tvShowEntities = new MutableLiveData<>();
+        remoteRepository.getTvShows(new RemoteRepository.LoadTvShowsCallback() {
+            @Override
+            public void onAllTvShowsReceive(List<TvShowResponse> tvShowResponses) {
+                for (int i=0; i<tvShowResponses.size(); i++){
+                    TvShowResponse response = tvShowResponses.get(i);
+                    if (response.getId().equals(tvId)){
+                        TvShowEntity entity = new TvShowEntity(response.getId(),
+                                            response.getTitle(),
+                                            response.getDate(),
+                                            response.getRate(),
+                                            response.getPoster(),
+                                            response.getBackground(),
+                                            response.getSynopsis());
+                        tvShowEntities.postValue(entity);
+                    }
+                }
             }
-        }
 
-        return entity;
+            @Override
+            public void onDataNotAvailabe() {
+
+            }
+        });
+
+
+        return tvShowEntities;
     }
 }
