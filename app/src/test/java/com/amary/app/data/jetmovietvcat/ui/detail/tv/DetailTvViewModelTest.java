@@ -1,10 +1,15 @@
 package com.amary.app.data.jetmovietvcat.ui.detail.tv;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
 import com.amary.app.data.jetmovietvcat.data.source.JetMovieTvRepository;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
 import com.amary.app.data.jetmovietvcat.utils.FakeDataDummy;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,10 +18,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class DetailTvViewModelTest {
+
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule =new InstantTaskExecutorRule();
+
     private DetailTvViewModel viewModel;
     private JetMovieTvRepository jetMovieTvRepository = mock(JetMovieTvRepository.class);
-    private TvShowEntity tvShowEntity = FakeDataDummy.generateDummyTvShows().get(0);
-    private String tvShowId = tvShowEntity.getTvId();
+    private TvShowEntity tvShowsDummy = FakeDataDummy.generateDummyTvShows().get(0);
+    private String tvShowId = tvShowsDummy.getTvId();
 
     @Before
     public void setUp(){
@@ -26,25 +35,14 @@ public class DetailTvViewModelTest {
 
     @Test
     public void getTvShow() {
+        MutableLiveData<TvShowEntity> tvShowEntity = new MutableLiveData<>();
+        tvShowEntity.setValue(tvShowsDummy);
+
         when(jetMovieTvRepository.getDetailTvShows(tvShowId)).thenReturn(tvShowEntity);
-        TvShowEntity entity = viewModel.getTvShow();
+
+        Observer<TvShowEntity> observer = mock(Observer.class);
+        viewModel.getTvShow().observeForever(observer);
+
         verify(jetMovieTvRepository).getDetailTvShows(tvShowId);
-        assertNotNull(entity);
-
-        assertNotNull(entity.getTvId());
-        assertNotNull(entity.getTvTitle());
-        assertNotNull(entity.getTvDate());
-        assertNotNull(entity.getTvRate());
-        assertNotNull(entity.getImgTvPoster());
-        assertNotNull(entity.getImgTvBg());
-        assertNotNull(entity.getTvSynopsis());
-
-        assertEquals(tvShowEntity.getTvId(), entity.getTvId());
-        assertEquals(tvShowEntity.getTvTitle(), entity.getTvTitle());
-        assertEquals(tvShowEntity.getTvDate(), entity.getTvDate());
-        assertEquals(tvShowEntity.getTvRate(), entity.getTvRate());
-        assertEquals(tvShowEntity.getImgTvPoster(), entity.getImgTvPoster());
-        assertEquals(tvShowEntity.getImgTvBg(), entity.getImgTvBg());
-        assertEquals(tvShowEntity.getTvSynopsis(), entity.getTvSynopsis());
     }
 }

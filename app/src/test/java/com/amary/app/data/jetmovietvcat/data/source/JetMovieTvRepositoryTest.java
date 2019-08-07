@@ -9,16 +9,21 @@ import com.amary.app.data.jetmovietvcat.data.source.remote.RemoteRepository;
 import com.amary.app.data.jetmovietvcat.data.source.remote.response.MovieResponse;
 import com.amary.app.data.jetmovietvcat.data.source.remote.response.TvShowResponse;
 import com.amary.app.data.jetmovietvcat.utils.FakeDataDummy;
+import com.amary.app.data.jetmovietvcat.utils.LiveDataTestUtil;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class JetMovieTvRepositoryTest {
     @Rule
@@ -36,27 +41,45 @@ public class JetMovieTvRepositoryTest {
 
     @Test
     public void getAllMovies(){
-        when(remoteRepository.getMovies()).thenReturn(movieResponses);
-        ArrayList<MovieEntity> movieEntities = fakeJetMovieTvRepository.getAllMovies();
-        verify(remoteRepository).getMovies();
+        doAnswer(invocation -> {
+            ((RemoteRepository.LoadMoviesCallback)invocation.getArguments()[0])
+                    .onAllMoviesReceive(movieResponses);
+            return null;
+        }).when(remoteRepository).getMovies(any(RemoteRepository.LoadMoviesCallback.class));
+
+        List<MovieEntity> movieEntities = LiveDataTestUtil.getValue(fakeJetMovieTvRepository.getAllMovies());
+
+        verify(remoteRepository, times(1)).getMovies(any(RemoteRepository.LoadMoviesCallback.class));
         assertNotNull(movieEntities);
         assertEquals(movieResponses.size(), movieEntities.size());
     }
 
     @Test
     public void getAllTvShows(){
-        when(remoteRepository.getTvShows()).thenReturn(tvShowResponses);
-        ArrayList<TvShowEntity> tvShowEntities = fakeJetMovieTvRepository.getAllTvShows();
-        verify(remoteRepository).getTvShows();
+        doAnswer(invocation -> {
+            ((RemoteRepository.LoadTvShowsCallback)invocation.getArguments()[0])
+                    .onAllTvShowsReceive(tvShowResponses);
+            return null;
+        }).when(remoteRepository).getTvShows(any(RemoteRepository.LoadTvShowsCallback.class));
+
+        List<TvShowEntity> tvShowEntities = LiveDataTestUtil.getValue(fakeJetMovieTvRepository.getAllTvShows());
+        verify(remoteRepository, times(1)).getTvShows(any(RemoteRepository.LoadTvShowsCallback.class));
         assertNotNull(tvShowEntities);
         assertEquals(tvShowResponses.size(), tvShowEntities.size());
     }
 
     @Test
     public void getDetailMovie(){
-        when(remoteRepository.getMovies()).thenReturn(movieResponses);
-        MovieEntity entity = fakeJetMovieTvRepository.getDetailMovie(movieId);
-        verify(remoteRepository).getMovies();
+        doAnswer(invocation -> {
+            ((RemoteRepository.LoadMoviesCallback) invocation.getArguments()[0])
+                    .onAllMoviesReceive(movieResponses);
+            return null;
+        }).when(remoteRepository).getMovies(any(RemoteRepository.LoadMoviesCallback.class));
+
+        MovieEntity entity = LiveDataTestUtil.getValue(fakeJetMovieTvRepository.getDetailMovie(movieId));
+
+        verify(remoteRepository, times(1)).getMovies(any(RemoteRepository.LoadMoviesCallback.class));
+
         assertNotNull(entity);
         assertEquals(movieResponses.get(0).getTitle(), entity.getMovieTitle());
         assertEquals(movieResponses.get(0).getDate(), entity.getMovieDate());
@@ -68,9 +91,16 @@ public class JetMovieTvRepositoryTest {
 
     @Test
     public void getDetailTvShows(){
-        when(remoteRepository.getTvShows()).thenReturn(tvShowResponses);
-        TvShowEntity entity = fakeJetMovieTvRepository.getDetailTvShows(tvshowId);
-        verify(remoteRepository).getTvShows();
+        doAnswer(invocation -> {
+            ((RemoteRepository.LoadTvShowsCallback) invocation.getArguments()[0])
+                    .onAllTvShowsReceive(tvShowResponses);
+            return null;
+        }).when(remoteRepository).getTvShows(any(RemoteRepository.LoadTvShowsCallback.class));
+
+        TvShowEntity entity = LiveDataTestUtil.getValue(fakeJetMovieTvRepository.getDetailTvShows(tvshowId));
+
+        verify(remoteRepository, times(1)).getTvShows(any(RemoteRepository.LoadTvShowsCallback.class));
+
         assertNotNull(entity);
         assertEquals(tvShowResponses.get(0).getTitle(), entity.getTvTitle());
         assertEquals(tvShowResponses.get(0).getDate(), entity.getTvDate());

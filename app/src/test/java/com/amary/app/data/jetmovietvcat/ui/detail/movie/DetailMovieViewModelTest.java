@@ -1,10 +1,15 @@
 package com.amary.app.data.jetmovietvcat.ui.detail.movie;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
 import com.amary.app.data.jetmovietvcat.data.source.JetMovieTvRepository;
 import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
 import com.amary.app.data.jetmovietvcat.utils.FakeDataDummy;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,10 +18,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class DetailMovieViewModelTest {
+
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule =new InstantTaskExecutorRule();
+
     private DetailMovieViewModel viewModel;
     private JetMovieTvRepository jetMovieTvRepository = mock(JetMovieTvRepository.class);
-    private MovieEntity movieEntity = FakeDataDummy.generateDummyMovies().get(0);
-    private String movieId = movieEntity.getMovieId();
+    private MovieEntity movieDummy = FakeDataDummy.generateDummyMovies().get(0);
+    private String movieId = movieDummy.getMovieId();
 
     @Before
     public void setUp(){
@@ -26,25 +35,15 @@ public class DetailMovieViewModelTest {
 
     @Test
     public void getMovies() {
-        when(jetMovieTvRepository.getDetailMovie(movieId)).thenReturn(movieEntity);
-        MovieEntity entity = viewModel.getMovies();
+        MutableLiveData<MovieEntity> movieEntities = new MutableLiveData<>();
+        movieEntities.setValue(movieDummy);
+
+
+        when(jetMovieTvRepository.getDetailMovie(movieId)).thenReturn(movieEntities);
+
+        Observer<MovieEntity> observer = mock(Observer.class);
+        viewModel.getMovies().observeForever(observer);
+
         verify(jetMovieTvRepository).getDetailMovie(movieId);
-        assertNotNull(entity);
-
-        assertNotNull(entity.getMovieId());
-        assertNotNull(entity.getMovieTitle());
-        assertNotNull(entity.getMovieDate());
-        assertNotNull(entity.getMovieRate());
-        assertNotNull(entity.getImgMoviePoster());
-        assertNotNull(entity.getImgMovieBg());
-        assertNotNull(entity.getMovieSynopsis());
-
-        assertEquals(movieEntity.getMovieId(), entity.getMovieId());
-        assertEquals(movieEntity.getMovieTitle(), entity.getMovieTitle());
-        assertEquals(movieEntity.getMovieDate(), entity.getMovieDate());
-        assertEquals(movieEntity.getMovieRate(), entity.getMovieRate());
-        assertEquals(movieEntity.getImgMoviePoster(), entity.getImgMoviePoster());
-        assertEquals(movieEntity.getImgMovieBg(), entity.getImgMovieBg());
-        assertEquals(movieEntity.getMovieSynopsis(), entity.getMovieSynopsis());
     }
 }
