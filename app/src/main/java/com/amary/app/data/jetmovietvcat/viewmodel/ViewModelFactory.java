@@ -38,6 +38,7 @@ public class ViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+
         if (modelClass.isAssignableFrom(MovieViewModel.class)){
             //noinspection unchecked
             return (T) new MovieViewModel(jetMovieTvRepository);
