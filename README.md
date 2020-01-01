@@ -3,11 +3,11 @@
 <br><h1 align="center">Android - JetPack Sample</h1></br>
 </p>
 
-<h2>Komponen yang digunakan<h2/>
-  - MVVM
-  - LiveData
-  - Room Database
-  - Pagination
+<h2>Komponen yang digunakan</h2>
+  </br>- MVVM
+  </br>- LiveData
+  </br>- Room Database
+  </br>- Pagination
   
  <h2>Link Referensi</h2>
  <a href="https://developer.android.com/jetpack">Android Jetpack</a>
