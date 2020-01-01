@@ -1,4 +1,4 @@
 <p align="center">
-<img src="https://github.com/amary21/JetMovieTvCatalogue/blob/master/app/src/main/res/drawable/screenshot.gif" title="screenshot"/>
-<br><h1 align="center">Flutter - Gridview, Cardview with Fragment</h1></br>
+<img src="<img src="https://i.imgur.com/edsz8Eu.gif" width=384 height=640 alt="" title="screenshot"/>
+<br><h1 align="center">Android - JetPack Sample</h1></br>
 </p>
