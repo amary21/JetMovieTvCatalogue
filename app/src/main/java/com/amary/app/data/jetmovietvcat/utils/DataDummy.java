@@ -1,7 +1,7 @@
 package com.amary.app.data.jetmovietvcat.utils;
 
-import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
-import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
+import com.amary.app.data.jetmovietvcat.data.MovieEntity;
+import com.amary.app.data.jetmovietvcat.data.TvShowEntity;
 
 import java.util.ArrayList;
 
@@ -147,7 +147,9 @@ public class DataDummy {
                 "6.8",
                 "https://image.tmdb.org/t/p/w342/4XddcRDtnNjYmLRMYpbrhFxsbuq.jpg",
                 "https://image.tmdb.org/t/p/w342/mKBP1OCgCG0jw8DwVYlnYqVILtc.jpg",
-                "Before there was Batman, there was GOTHAM. Everyone knows the name Commissioner Gordon. He is one of the crime world's greatest foes, a man whose reputation is synonymous with law and order. But what is known of Gordon's story and his rise from rookie detective to Police Commissioner? What did it take to navigate the multiple layers of corruption that secretly ruled Gotham City, the spawning ground of the world's most iconic villains? And what circumstances created them – the larger-than-life personas who would become Catwoman, The Penguin, The Riddler, Two-Face and The Joker?"));
+                "Before there was Batman, there was GOTHAM.\n" +
+                        "\n" +
+                        "Everyone knows the name Commissioner Gordon. He is one of the crime world's greatest foes, a man whose reputation is synonymous with law and order. But what is known of Gordon's story and his rise from rookie detective to Police Commissioner? What did it take to navigate the multiple layers of corruption that secretly ruled Gotham City, the spawning ground of the world's most iconic villains? And what circumstances created them – the larger-than-life personas who would become Catwoman, The Penguin, The Riddler, Two-Face and The Joker?"));
         entities.add(new TvShowEntity("t10",
                 "Grey's Anatomy",
                 "March 27, 2005",

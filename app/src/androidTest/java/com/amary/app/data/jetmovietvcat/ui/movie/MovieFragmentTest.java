@@ -1,12 +1,10 @@
 package com.amary.app.data.jetmovietvcat.ui.movie;
 
-import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.rule.ActivityTestRule;
 
 import com.amary.app.data.jetmovietvcat.R;
 import com.amary.app.data.jetmovietvcat.testing.SingleFragmentActivity;
-import com.amary.app.data.jetmovietvcat.utils.EspressoIdlingResource;
 import com.amary.app.data.jetmovietvcat.utils.RecyclerViewItemCountAssertion;
 
 import org.junit.After;
@@ -28,33 +26,20 @@ public class MovieFragmentTest {
 
     @Before
     public void setUp(){
-        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource());
         activityTestRule.getActivity().setFragment(movieFragment);
     }
 
     @After
-    public void tearDown(){
-        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource());
-    }
+    public void tearDown(){}
 
     @Test
     public void loadMovies(){
-        try {
-            Thread.sleep(3000);
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         onView(withId(R.id.rv_movies)).check(matches(isDisplayed()));
         onView(withId(R.id.rv_movies)).check(new RecyclerViewItemCountAssertion(10));
     }
 
     @Test
     public void clickMovie(){
-        try {
-            Thread.sleep(3000);
-        }catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         onView(withId(R.id.rv_movies)).check(matches(isDisplayed()));
         onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
     }

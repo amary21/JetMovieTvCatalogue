@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amary.app.data.jetmovietvcat.R;
-import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
+import com.amary.app.data.jetmovietvcat.data.TvShowEntity;
 import com.amary.app.data.jetmovietvcat.ui.detail.tv.DetailTvActivity;
 import com.amary.app.data.jetmovietvcat.utils.GlideApp;
 import com.bumptech.glide.request.RequestOptions;
@@ -61,7 +61,6 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.TvShowView
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(activity, DetailTvActivity.class);
             intent.putExtra(DetailTvActivity.EXTRA_TV, getListTvShow().get(position).getTvId());
-            intent.putExtra(DetailTvActivity.TITLE_TV, getListTvShow().get(position).getTvTitle());
             activity.startActivity(intent);
         });
     }

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amary.app.data.jetmovietvcat.R;
-import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
+import com.amary.app.data.jetmovietvcat.data.MovieEntity;
 import com.amary.app.data.jetmovietvcat.ui.detail.movie.DetailMovieActivity;
 import com.amary.app.data.jetmovietvcat.utils.GlideApp;
 import com.bumptech.glide.request.RequestOptions;
@@ -61,7 +61,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(activity, DetailMovieActivity.class);
             intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, getListMovie().get(position).getMovieId());
-            intent.putExtra(DetailMovieActivity.TITLE_MOVIE, getListMovie().get(position).getMovieTitle());
             activity.startActivity(intent);
         });
     }

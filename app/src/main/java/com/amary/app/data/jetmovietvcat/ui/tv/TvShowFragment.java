@@ -10,14 +10,12 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amary.app.data.jetmovietvcat.R;
-import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
-import com.amary.app.data.jetmovietvcat.viewmodel.ViewModelFactory;
+import com.amary.app.data.jetmovietvcat.data.TvShowEntity;
 
 import java.util.List;
 
@@ -55,26 +53,16 @@ public class TvShowFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            progressBar.setVisibility(View.VISIBLE);
-            TvShowViewModel viewModel = obtainViewModel(getActivity());
+            progressBar.setVisibility(View.GONE);
+            TvShowViewModel viewModel = ViewModelProviders.of(this).get(TvShowViewModel.class);
+            List<TvShowEntity> tvShows = viewModel.getTvs();
 
             TvShowAdapter adapter = new TvShowAdapter(getActivity());
-
-            viewModel.getTvs().observe(this, tvShowEntities -> {
-                progressBar.setVisibility(View.GONE);
-                adapter.setListTvShow(tvShowEntities);
-                adapter.notifyDataSetChanged();
-            });
+            adapter.setListTvShow(tvShows);
 
             rvTvShow.setLayoutManager(new LinearLayoutManager(getContext()));
             rvTvShow.setHasFixedSize(true);
             rvTvShow.setAdapter(adapter);
         }
-    }
-
-    @NonNull
-    private static TvShowViewModel obtainViewModel(FragmentActivity activity) {
-        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
-        return ViewModelProviders.of(activity, factory).get(TvShowViewModel.class);
     }
 }

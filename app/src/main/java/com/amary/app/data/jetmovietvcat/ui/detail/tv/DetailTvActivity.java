@@ -2,9 +2,7 @@ package com.amary.app.data.jetmovietvcat.ui.detail.tv;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,23 +11,21 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.amary.app.data.jetmovietvcat.R;
-import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
+import com.amary.app.data.jetmovietvcat.data.TvShowEntity;
 import com.amary.app.data.jetmovietvcat.utils.DataDummy;
 import com.amary.app.data.jetmovietvcat.utils.GlideApp;
-import com.amary.app.data.jetmovietvcat.viewmodel.ViewModelFactory;
 import com.bumptech.glide.request.RequestOptions;
 
 public class DetailTvActivity extends AppCompatActivity {
 
     public static final String EXTRA_TV = "extra_tv";
-    public static final String TITLE_TV = "title_tv";
 
     private TextView txtDetailDateTvShow;
     private TextView txtDetailRateTvShow;
     private TextView txtDetailSynopsisTvShow;
     private ImageView imgDetailPosterTvShow;
     private ImageView imgDetailBgTvShow;
-    private ProgressBar pbLoadingDetail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +34,7 @@ public class DetailTvActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DetailTvViewModel viewModel = obtainViewModel(this);
+        DetailTvViewModel viewModel = ViewModelProviders.of(this).get(DetailTvViewModel.class);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,34 +46,23 @@ public class DetailTvActivity extends AppCompatActivity {
         txtDetailSynopsisTvShow = findViewById(R.id.txt_detail_tvshow_sinopsis);
         imgDetailPosterTvShow = findViewById(R.id.img_detail_tvshow_poster);
         imgDetailBgTvShow = findViewById(R.id.img_detail_tvshow_bg);
-        pbLoadingDetail = findViewById(R.id.pb_loading_detail);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String tvId = extras.getString(EXTRA_TV);
-            String tvTitle = extras.getString(TITLE_TV);
             if (tvId != null) {
                 viewModel.setTvId(tvId);
-                getSupportActionBar().setTitle(tvTitle);
             }
         }
-
-        viewModel.getTvShow().observe(this, tvShowEntity -> {
-            if (tvShowEntity != null){
-                populateTv(tvShowEntity);
-                pbLoadingDetail.setVisibility(View.GONE);
-            }
-        });
+        if (viewModel.getTvShow() != null) {
+            populateTv(viewModel.getTvId());
+        }
 
     }
 
-    @NonNull
-    private static DetailTvViewModel obtainViewModel(AppCompatActivity activity) {
-        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
-        return ViewModelProviders.of(activity,factory).get(DetailTvViewModel.class);
-    }
+    private void populateTv(String tvId) {
+        TvShowEntity tvShowEntity = DataDummy.getTvShowEntity(tvId);
 
-    private void populateTv(TvShowEntity tvShowEntity) {
         if (getSupportActionBar() != null && tvShowEntity != null) {
             getSupportActionBar().setTitle(tvShowEntity.getTvTitle());
 

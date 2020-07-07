@@ -2,9 +2,7 @@ package com.amary.app.data.jetmovietvcat.ui.detail.movie;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,23 +11,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.amary.app.data.jetmovietvcat.R;
-import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
+import com.amary.app.data.jetmovietvcat.data.MovieEntity;
 import com.amary.app.data.jetmovietvcat.utils.DataDummy;
 import com.amary.app.data.jetmovietvcat.utils.GlideApp;
-import com.amary.app.data.jetmovietvcat.viewmodel.ViewModelFactory;
 import com.bumptech.glide.request.RequestOptions;
 
 public class DetailMovieActivity extends AppCompatActivity {
 
     public static final String EXTRA_MOVIE = "extra_movie";
-    public static final String TITLE_MOVIE = "title_movie";
 
     private TextView txtDetailDateMovie;
     private TextView txtDetailRateMovie;
     private TextView txtDetailSynopsisMovie;
     private ImageView imgDetailPosterMovie;
     private ImageView imgDetailBgMovie;
-    private ProgressBar pbLoadingDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +33,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DetailMovieViewModel viewModel = obtainViewModel(this);
+        DetailMovieViewModel viewModel = ViewModelProviders.of(this).get(DetailMovieViewModel.class);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,34 +45,28 @@ public class DetailMovieActivity extends AppCompatActivity {
         txtDetailSynopsisMovie = findViewById(R.id.txt_detail_movie_sinopsis);
         imgDetailPosterMovie = findViewById(R.id.img_detail_movie_poster);
         imgDetailBgMovie = findViewById(R.id.img_detail_movie_bg);
-        pbLoadingDetail = findViewById(R.id.pb_loading_detail);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String movieId = extras.getString(EXTRA_MOVIE);
-            String movieTitle = extras.getString(TITLE_MOVIE);
             if (movieId != null) {
                 viewModel.setMovieId(movieId);
-                getSupportActionBar().setTitle(movieTitle);
             }
         }
 
-        viewModel.getMovies().observe(this, movieEntity -> {
-            if (movieEntity != null){
-                populateMovie(movieEntity);
-                pbLoadingDetail.setVisibility(View.GONE);
-            }
-        });
+        if (viewModel.getMovies() != null) {
+            populateMovie(viewModel.getMovieId());
+        }
+
 
     }
 
-    @NonNull
-    private static DetailMovieViewModel obtainViewModel(AppCompatActivity activity) {
-        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
-        return ViewModelProviders.of(activity, factory).get(DetailMovieViewModel.class);
-    }
+    private void populateMovie(String movieId) {
+        MovieEntity movieEntity = DataDummy.getMovieEntity(movieId);
 
-    private void populateMovie(MovieEntity movieEntity) {
+        if (getSupportActionBar() != null && movieEntity != null) {
+            getSupportActionBar().setTitle(movieEntity.getMovieTitle());
+
             txtDetailDateMovie.setText(movieEntity.getMovieDate());
             txtDetailRateMovie.setText(movieEntity.getMovieRate());
             txtDetailSynopsisMovie.setText(movieEntity.getMovieSynopsis());
@@ -91,6 +80,8 @@ public class DetailMovieActivity extends AppCompatActivity {
                     .load(movieEntity.getImgMovieBg())
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_error))
                     .into(imgDetailBgMovie);
+        }
+
     }
 
     @Override

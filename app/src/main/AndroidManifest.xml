@@ -16,7 +16,7 @@
         <activity
             android:name=".ui.detail.tv.DetailTvActivity"
             android:label="@string/title_activity_detail_tv"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ui.detail.movie.DetailMovieActivity"
             android:label="@string/title_activity_detail_movie"

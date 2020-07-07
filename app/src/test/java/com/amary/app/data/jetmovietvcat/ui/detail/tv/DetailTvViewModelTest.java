@@ -1,47 +1,45 @@
 package com.amary.app.data.jetmovietvcat.ui.detail.tv;
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
+import com.amary.app.data.jetmovietvcat.data.TvShowEntity;
 
-import com.amary.app.data.jetmovietvcat.data.source.JetMovieTvRepository;
-import com.amary.app.data.jetmovietvcat.data.source.local.entity.TvShowEntity;
-import com.amary.app.data.jetmovietvcat.utils.FakeDataDummy;
-
+import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
 
 public class DetailTvViewModelTest {
-
-    @Rule
-    public InstantTaskExecutorRule instantTaskExecutorRule =new InstantTaskExecutorRule();
-
     private DetailTvViewModel viewModel;
-    private JetMovieTvRepository jetMovieTvRepository = mock(JetMovieTvRepository.class);
-    private TvShowEntity tvShowsDummy = FakeDataDummy.generateDummyTvShows().get(0);
-    private String tvShowId = tvShowsDummy.getTvId();
+    private TvShowEntity tvShowEntity;
 
     @Before
     public void setUp(){
-        viewModel = new DetailTvViewModel(jetMovieTvRepository);
-        viewModel.setTvId(tvShowId);
+        viewModel = new DetailTvViewModel();
+        tvShowEntity = new TvShowEntity("t06",
+                "Family Guy",
+                "January 31, 1999",
+                "6.5",
+                "https://image.tmdb.org/t/p/w342/gBGUL1UTUNmdRQT8gA1LUV4yg39.jpg",
+                "https://image.tmdb.org/t/p/w342/3OFrs1ets87VmRvG78Zg5eJTZeq.jpg",
+                "Sick, twisted, politically incorrect and Freakin' Sweet animated series featuring the adventures of the dysfunctional Griffin family. Bumbling Peter and long-suffering Lois have three kids. Stewie (a brilliant but sadistic baby bent on killing his mother and taking over the world), Meg (the oldest, and is the most unpopular girl in town) and Chris (the middle kid, he's not very bright but has a passion for movies). The final member of the family is Brian - a talking dog and much more than a pet, he keeps Stewie in check whilst sipping Martinis and sorting through his own life issues.");
+    }
+
+    @After
+    public void teatDown(){
+
     }
 
     @Test
     public void getTvShow() {
-        MutableLiveData<TvShowEntity> tvShowEntity = new MutableLiveData<>();
-        tvShowEntity.setValue(tvShowsDummy);
-
-        when(jetMovieTvRepository.getDetailTvShows(tvShowId)).thenReturn(tvShowEntity);
-
-        Observer<TvShowEntity> observer = mock(Observer.class);
-        viewModel.getTvShow().observeForever(observer);
-
-        verify(jetMovieTvRepository).getDetailTvShows(tvShowId);
+        viewModel.setTvId(tvShowEntity.getTvId());
+        TvShowEntity entity = viewModel.getTvShow();
+        assertNotNull(entity);
+        assertEquals(tvShowEntity.getTvId(), entity.getTvId());
+        assertEquals(tvShowEntity.getTvTitle(), entity.getTvTitle());
+        assertEquals(tvShowEntity.getTvDate(), entity.getTvDate());
+        assertEquals(tvShowEntity.getTvRate(), entity.getTvRate());
+        assertEquals(tvShowEntity.getImgTvPoster(), entity.getImgTvPoster());
+        assertEquals(tvShowEntity.getImgTvBg(), entity.getImgTvBg());
+        assertEquals(tvShowEntity.getTvSynopsis(), entity.getTvSynopsis());
     }
 }

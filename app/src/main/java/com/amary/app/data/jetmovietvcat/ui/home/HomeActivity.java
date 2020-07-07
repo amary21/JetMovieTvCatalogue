@@ -11,8 +11,6 @@ import com.amary.app.data.jetmovietvcat.ui.movie.MovieFragment;
 import com.amary.app.data.jetmovietvcat.ui.tv.TvShowFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
-
 public class HomeActivity extends AppCompatActivity {
     private final String SELECTED_MENU = "selected_menu";
     private BottomNavigationView navView;
@@ -25,8 +23,6 @@ public class HomeActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.navigation_tvshows) {
             fragment = TvShowFragment.newInstance();
         }
-
-        //created by taufik
 
         if (fragment != null) {
             getSupportFragmentManager()
