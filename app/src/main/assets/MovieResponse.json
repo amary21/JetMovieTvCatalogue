@@ -1,0 +1,104 @@
+{
+  "movies": [
+    {
+      "id": "m01",
+      "title": "A Star Is Born",
+      "date": "October 3, 2018",
+      "rate": "7.5",
+      "poster": "https://image.tmdb.org/t/p/w342/wrFpXMNBRj2PBiN4Z5kix51XaIZ.jpg",
+      "background": "https://image.tmdb.org/t/p/w342/mnDvPokXpvsdPcWSjNRPhiiLOKu.jpg",
+      "synopsis": "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons."
+
+    },
+    {
+      "id": "m02",
+      "title": "Alita: Battle Angel",
+      "date": "January 31, 2019",
+      "rate": "6.8",
+      "poster": "https://image.tmdb.org/t/p/w342/hLuWJCEdI4bKxhugxnuGKyWwI7I.jpg",
+      "background": "https://image.tmdb.org/t/p/w342/8RKBHHRqOMOLh5qW3sS6TSFTd8h.jpg",
+      "synopsis": "When Alita awakens with no memory of who she is in a future world she does not recognize, she is taken in by Ido, a compassionate doctor who realizes that somewhere in this abandoned cyborg shell is the heart and soul of a young woman with an extraordinary past."
+
+    },
+    {
+      "id": "m03",
+      "title": "Aquaman",
+      "date": "December 7, 2018",
+      "rate": "6.8",
+      "poster": "https://image.tmdb.org/t/p/w342/5Kg76ldv7VxeX9YlcQXiowHgdX6.jpg",
+      "background": "https://image.tmdb.org/t/p/w342/9QusGjxcYvfPD1THg6oW3RLeNn7.jpg",
+      "synopsis": "Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm's half-human, half-Atlantean brother and true heir to the throne."
+
+    },
+    {
+      "id": "m04",
+      "title": "Bohemian Rhapsody",
+      "date": "October 24, 201",
+      "rate": "8.1",
+      "poster": "https://image.tmdb.org/t/p/w342/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg",
+      "background": "https://image.tmdb.org/t/p/w342/xcaSYLBhmDzJ6P14bcKe0KTh3QV.jpg",
+      "synopsis": "Singer Freddie Mercury, guitarist Brian May, drummer Roger Taylor and bass guitarist John Deacon take the music world by storm when they form the rock 'n' roll band Queen in 1970. Hit songs become instant classics. When Mercury's increasingly wild lifestyle starts to spiral out of control, Queen soon faces its greatest challenge yet – finding a way to keep the band together amid the success and excess."
+
+    },
+    {
+      "id": "m05",
+      "title": "Cold Pursuit",
+      "date": "February 7, 2019",
+      "rate": "5.4",
+      "poster": "https://image.tmdb.org/t/p/w342/hXgmWPd1SuujRZ4QnKLzrj79PAw.jpg",
+      "background": "https://image.tmdb.org/t/p/w342/1OjgfTVfXushKmdcQ2Xxn9RbNte.jpg",
+      "synopsis": "The quiet family life of Nels Coxman, a snowplow driver, is upended after his son's murder. Nels begins a vengeful hunt for Viking, the drug lord he holds responsible for the killing, eliminating Viking's associates one by one. As Nels draws closer to Viking, his actions bring even more unexpected and violent consequences, as he proves that revenge is all in the execution."
+
+    },
+    {
+      "id": "m06",
+      "title": "Creed II",
+      "date": "November 21, 2018",
+      "rate": "6.7",
+      "poster": "https://image.tmdb.org/t/p/w342/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg",
+      "background": "https://image.tmdb.org/t/p/w342/hZqx2JcZVjHSY2lMEMDC0XlObiw.jpg",
+      "synopsis": "Between personal obligations and training for his next big fight against an opponent with ties to his family's past, Adonis Creed is up against the challenge of his life."
+
+    },
+    {
+      "id": "m07",
+      "title": "Fantastic Beasts: The Crimes of Grindelwald",
+      "date": "November 14, 2018",
+      "rate": "6.9",
+      "poster": "https://image.tmdb.org/t/p/w342/fMMrl8fD9gRCFJvsx0SuFwkEOop.jpg",
+      "background": "https://image.tmdb.org/t/p/w342/qrtRKRzoNkf5vemO9tJ2Y4DrHxQ.jpg",
+      "synopsis": "Gellert Grindelwald has escaped imprisonment and has begun gathering followers to his cause—elevating wizards above all non-magical beings. The only one capable of putting a stop to him is the wizard he once called his closest friend, Albus Dumbledore. However, Dumbledore will need to seek help from the wizard who had thwarted Grindelwald once before, his former student Newt Scamander, who agrees to help, unaware of the dangers that lie ahead. Lines are drawn as love and loyalty are tested, even among the truest friends and family, in an increasingly divided wizarding world."
+
+    },
+    {
+      "id": "m08",
+      "title": "Glass",
+      "date": "January 16, 2019",
+      "rate": "6.5",
+      "poster": "https://image.tmdb.org/t/p/w342/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg",
+      "background": "https://image.tmdb.org/t/p/w342/ngBFDOsx13sFXiMweDoL54XYknR.jpg",
+      "synopsis": "In a series of escalating encounters, former security guard David Dunn uses his supernatural abilities to track Kevin Wendell Crumb, a disturbed man who has twenty-four personalities. Meanwhile, the shadowy presence of Elijah Price emerges as an orchestrator who holds secrets critical to both men."
+
+    },
+    {
+      "id": "m09",
+      "title": "How to Train Your Dragon: The Hidden World",
+      "date": "January 3, 2019",
+      "rate": "7.6",
+      "poster": "https://image.tmdb.org/t/p/w342/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg",
+      "background": "https://image.tmdb.org/t/p/w342/nkWMDZgiBcvcWyAtmJrgY0oYZvR.jpg",
+      "synopsis": "As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind."
+
+    },
+    {
+      "id": "m10",
+      "title": "Avengers: Infinity War",
+      "date": "April 25, 2018",
+      "rate": "8.3",
+      "poster": "https://image.tmdb.org/t/p/w342/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+      "background": "https://image.tmdb.org/t/p/w342/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg",
+      "synopsis": "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain."
+
+    }
+  ]
+}

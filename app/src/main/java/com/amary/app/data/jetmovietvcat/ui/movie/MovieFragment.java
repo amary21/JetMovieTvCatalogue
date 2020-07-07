@@ -10,14 +10,13 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amary.app.data.jetmovietvcat.R;
-import com.amary.app.data.jetmovietvcat.data.MovieEntity;
-
-import java.util.List;
+import com.amary.app.data.jetmovietvcat.viewmodel.ViewModelFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,16 +51,26 @@ public class MovieFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            progressBar.setVisibility(View.GONE);
-            MovieViewModel viewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
-            List<MovieEntity> movies = viewModel.getMovies();
+            progressBar.setVisibility(View.VISIBLE);
+            MovieViewModel viewModel = obtainViewModel(getActivity());
 
             MovieAdapter adapter = new MovieAdapter(getActivity());
-            adapter.setListMovie(movies);
+
+            viewModel.getMovies().observe(this, movieEntities -> {
+                progressBar.setVisibility(View.GONE);
+                adapter.setListMovie(movieEntities);
+                adapter.notifyDataSetChanged();
+            });
 
             rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
             rvMovie.setHasFixedSize(true);
             rvMovie.setAdapter(adapter);
         }
+    }
+
+    @NonNull
+    private static MovieViewModel obtainViewModel(FragmentActivity activity) {
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+        return ViewModelProviders.of(activity, factory).get(MovieViewModel.class);
     }
 }

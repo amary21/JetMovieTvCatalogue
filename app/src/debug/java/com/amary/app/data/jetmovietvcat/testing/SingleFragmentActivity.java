@@ -37,10 +37,4 @@ public class SingleFragmentActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public void replaceFragment(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.container, fragment)
-                .commit();
-    }
 }

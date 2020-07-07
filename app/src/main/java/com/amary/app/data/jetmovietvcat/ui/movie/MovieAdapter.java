@@ -12,13 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amary.app.data.jetmovietvcat.R;
-import com.amary.app.data.jetmovietvcat.data.MovieEntity;
+import com.amary.app.data.jetmovietvcat.data.source.local.entity.MovieEntity;
 import com.amary.app.data.jetmovietvcat.ui.detail.movie.DetailMovieActivity;
 import com.amary.app.data.jetmovietvcat.utils.GlideApp;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
     private final Activity activity;
@@ -61,6 +64,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(activity, DetailMovieActivity.class);
             intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, getListMovie().get(position).getMovieId());
+            intent.putExtra(DetailMovieActivity.TITLE_MOVIE, getListMovie().get(position).getMovieTitle());
             activity.startActivity(intent);
         });
     }
@@ -71,19 +75,21 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
-        final TextView tvTitle;
-        final TextView tvDate;
-        final TextView tvRate;
-        final ImageView imgPoster;
-        final ImageView imgBg;
+
+        @BindView(R.id.txt_movie_title)
+        TextView tvTitle;
+        @BindView(R.id.txt_movie_date)
+        TextView tvDate;
+        @BindView(R.id.txt_movie_rate)
+        TextView tvRate;
+        @BindView(R.id.img_movie_poster)
+        ImageView imgPoster;
+        @BindView(R.id.img_movie_bg)
+        ImageView imgBg;
 
         MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.txt_movie_title);
-            tvDate = itemView.findViewById(R.id.txt_movie_date);
-            tvRate = itemView.findViewById(R.id.txt_movie_rate);
-            imgPoster = itemView.findViewById(R.id.img_movie_poster);
-            imgBg = itemView.findViewById(R.id.img_movie_bg);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
